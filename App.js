@@ -27,7 +27,7 @@ export default class App extends React.Component {
   renderItem = (obj) => (
     // spread operator ...obj.item means that all the key values of item (i.e one object inside array). viz. 'name' and 'phone')
     
-    // item is a way for renderItem method (of FlatList) to access one element of the array passed to data. 
+    // item is a way for renderItem method (of FlatList) to access one element of the array passed to data. Here item is: {name: String, phone: String, key: Number}
 
     // Flat list uses renderItem() to  display all the elements of data ('obj' here) (i.e contacts) one by one on its own. we do NOT need to use map fn. 
 
