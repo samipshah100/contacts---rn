@@ -1,0 +1,66 @@
+ <script type="text/javascript">
+ 
+ let alphArray = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('')
+
+  let arr = [{name: "Samip", phone : "123"}, {name: "Satya", phone : "789"}, {name: "Chirag", phone : "456"},]
+  
+  let outputSample = 
+  [
+    {
+      title: "S", 
+      data: [{name: "Samip", phone : "123" }, {name: "Satya", phone : "789"}]
+    },
+    {
+      title: "C", 
+      data: [{name: "Chirag", phone : "456"},] 
+    }
+  ]
+
+
+  let final = []
+  const groupBy = (arr,alphArray) => {
+    return (
+      arr.reduce( 
+        (acc, obj) => {
+
+          // now key has String "S"
+          let key = obj.name.charAt(0).toUpperCase()
+
+          // now put  this obj in section 'S'
+
+          // thisObj will refer to the object for that section "S"
+          let thisObj = final.find(
+            o => {
+              return o.title === key
+            }
+
+          )
+
+          // if thisObj not found, create it
+
+          if(thisObj === undefined) {
+            final.push(
+              {
+                title: key,
+                data: [obj],
+              }
+            )
+          }
+
+          //insert obj in section s of acc
+          else  {
+            thisObj.data.push(obj)
+          }
+          
+          return final
+        }
+
+      ,{}
+      )
+    )
+  }
+
+  const sectionsArr = groupBy(arr, alphArray)
+
+  console.log (sectionsArr)
+</script>

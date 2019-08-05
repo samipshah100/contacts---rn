@@ -1,19 +1,27 @@
 import React from 'react';
-import { Button, FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button, SectionList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
+import ContactsList from './ContactsList'
+import AddContactForm from './AddContactForm'
 
 import contacts, {compareNames} from './contacts'
 
 import Row from './Row'
 
+let testArr = [{name: "samip", phone:"123"}]
+
 export default class App extends React.Component {
   state = {
     showContacts: false,
     contacts: contacts,
+    showForm:false,
   }
 
   toggleContacts = () => {
     this.setState(prevState => ({showContacts: !prevState.showContacts}))
+  }
+  toggleForm = () => {
+    this.setState(prevState => ({showForm: !prevState.showForm}))
   }
 
   sort = () => {
@@ -24,31 +32,21 @@ export default class App extends React.Component {
     )
   }
 
-  renderItem = (obj) => (
-    // spread operator ...obj.item means that all the key values of item (i.e one object inside array). viz. 'name' and 'phone')
-    
-    // item is a way for renderItem method (of FlatList) to access one element of the array passed to data. Here item is: {name: String, phone: String, key: Number}
-
-    // Flat list uses renderItem() to  display all the elements of data ('obj' here) (i.e contacts) one by one on its own. we do NOT need to use map fn. 
-
-    <Row {...obj.item} />
-    // above is same as <Row name = {obj.item.name} phone = {obj.item.phone}/>
-  )
-
   render() {
+    if (this.state.showForm) return <AddContactForm />
+    
     return (
       <View style={styles.container}>
-        <Button title="toggle contacts" onPress={this.toggleContacts} />
-        <Button title="sort" onPress={this.sort} />
-        {this.state.showContacts && ( 
-          <FlatList
-          data = {this.state.contacts}
-          renderItem = {this.renderItem}
+        <Button title="Toggle Contacts" onPress={this.toggleContacts} />
+        <Button title="Sort" onPress={this.sort} />
+        <Button title="Add Contact" onPress = {this.toggleForm}/>
+        {this.state.showContacts && 
+          <ContactsList 
+            contacts = {this.state.contacts}
           />
-        )
         }
       </View>
-    );
+    )
   }
 }
 
