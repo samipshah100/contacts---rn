@@ -1,12 +1,25 @@
 import React from 'react';
-import { Button, SectionList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { createAppContainer, createSwitchNavigator,Button, SectionList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import ContactsList from './ContactsList'
 import AddContactForm from './AddContactForm'
+// import AddContactScreen from './screens/AddContactScreen'
+// import ContactListScreen from './screens/ContactListScreen'
 
 import contacts, {compareNames} from './contacts'
 
 import Row from './Row'
+
+const AppNavigator = createSwitchNavigator( {
+  RouteDisplayContactsScreen: "a" ,
+  RouteAddContactScreen: "a",
+},
+{
+  initialRouteName: a,
+}
+)
+
+const AppContainer = createAppContainer(AppNavigator)
 
 let testArr = [{name: "samip", phone:"123"}]
 
@@ -32,8 +45,22 @@ export default class App extends React.Component {
     )
   }
 
+  addContact = newContact =>  {
+    this.setState(
+      prevState => ({
+        showForm:false,
+        contacts: [ ... prevState.contacts,newContact]
+      })
+    )
+
+  }
+
   render() {
-    if (this.state.showForm) return <AddContactForm />
+    if (this.state.showForm) return (
+      <View style = {styles.container}> 
+        <AddContactForm onSubmit = {this.addContact} />
+      </View>
+    )
     
     return (
       <View style={styles.container}>
