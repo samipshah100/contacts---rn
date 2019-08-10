@@ -10,7 +10,7 @@ export default class ContactListScreen extends React.Component {
   static navigationOptions = (exampleThings) => ({
     headerTitle: 'Contacts',
     headerRight: (
-      <Button title="Add" onPress={
+      <Button title="Add" color="#a41034" onPress={
         () => {
           exampleThings.navigation.navigate('AddContact')
         }
@@ -52,7 +52,7 @@ export default class ContactListScreen extends React.Component {
                   phone: contact.phone,
                   name: contact.name,
                 }
-                // pass the params to navigation props. This will be used in ContactDetailsScreen
+                  // pass the params to navigation props. This will be used in ContactDetailsScreen
                 )
               }
             }

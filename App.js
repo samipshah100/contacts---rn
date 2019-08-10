@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, SectionList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import AddContactForm from './AddContactForm'
-import { createAppContainer, createStackNavigator } from 'react-navigation'
+import { createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import AddContactScreen from './screens/AddContactScreen'
 import ContactListScreen from './screens/ContactListScreen'
 import ContactDetailsScreen from './screens/ContactDetailsScreen'
+import LoginScreen from './screens/LoginScreen'
 
 import contacts, { compareNames } from './contacts'
 
@@ -38,13 +39,27 @@ export default class App extends React.Component {
   }
 }
 
-const AppNavigator = createStackNavigator({
+
+const MainNavigator = createStackNavigator({
   AddContact: AddContactScreen,
   ContactList: ContactListScreen,
   ContactDetails: ContactDetailsScreen,
 },
+{
+  initialRouteName: "ContactList",
+  navigationOptions: {
+    headerTintColor: "#a41034",
+  },
+},
+)
+
+const AppNavigator = createSwitchNavigator(
   {
-    initialRouteName: "ContactList",
+    Main: MainNavigator,
+    Login: LoginScreen,
+  },
+  {
+    initialRouteName: "Login",
   }
 )
 
