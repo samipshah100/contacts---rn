@@ -7,7 +7,7 @@ const styles = StyleSheet.create (
   {
     container: {
       backgroundColor: '#fff',
-      paddingTop: Constants.statusBarHeight,
+      // paddingTop: Constants.statusBarHeight,
       // justifyContent: 'center',
       // flex:1,
     },
@@ -18,7 +18,7 @@ const styles = StyleSheet.create (
       borderWidth: 1,
     },
     form: {
-      paddingTop: Constants.statusBarHeight,
+      // paddingTop: Constants.statusBarHeight,
     },
   }
 )

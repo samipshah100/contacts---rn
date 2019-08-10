@@ -3,16 +3,7 @@ import { SectionList, Text } from 'react-native'
 import PropTypes from 'prop-types'
 import Row from './Row'
 
-const renderItem = (obj) => (
-  // spread operator ...obj.item means that all the key values of item (i.e one object inside array). viz. 'name' and 'phone')
 
-  // item is a way for renderItem method (of List) to access one element of the array passed to data. Here item is: {name: String, phone: String, key: Number}
-
-  // Flatlist and Section uses renderItem() to  display all the elements of data ('obj' here) (i.e contacts) one by one on its own. we do NOT need to use map fn. 
-
-  <Row {...obj.item} />
-  // above is same as <Row name = {obj.item.name} phone = {obj.item.phone}/>
-)
 
 // ANOTHER WAY to say this ^^^ : 
 // renderItem = ({item}) => <Row {...item} />
@@ -27,26 +18,24 @@ const renderSectionHeader = obj => (
 )
 
 const ContactsList = props => {
+  
+  const renderItem = (obj) => (
+    // spread operator ...obj.item means that all the key values of item (i.e one object inside array). viz. 'name' and 'phone')
+  
+    // item is a way for renderItem method (of List) to access one element of the array passed to data. Here item is: {name: String, phone: String, key: Number}
+  
+    // Flatlist and Section uses renderItem() to  display all the elements of data ('obj' here) (i.e contacts) one by one on its own. we do NOT need to use map fn. 
+  
+    <Row {...obj.item}
+    // above is same as <Row name = {obj.item.name} phone = {obj.item.phone}/>
+
+    onSelectContact = {(contact) => {
+      props.onSelectContact(contact)
+    }} // this is handler from ContactsListScreen.js as this component doesnt have access to navigation props. 
+    />
+  )
 
   let sectionsArr = []
-
-  //  let arr = [{name: "Samip", phone : "123"}, {name: "Satya", phone : "789"}, {name: "Chirag", phone : "456"},]
-
-  //  let outputSample = 
-  //  [
-  //    {
-  //      title: "S", 
-  //      data: [{name: "Samip", phone : "123" }, {name: "Satya", phone : "789"}]
-  //    },
-  //    {
-  //      title: "C", 
-  //      data: [{name: "Chirag", phone : "456"},] 
-  //    }
-  //  ]
-
-  // let arr = props.contacts
-  // const groupBy = (arr, alphArray) => {
-  //   return (
   
   props.contacts.reduce(
     (acc, obj) => {
@@ -102,3 +91,25 @@ ContactsList.propsTypes = {
   contacts: PropTypes.array,
 }
 export default ContactsList
+
+
+
+////////////////////// for testing ///////
+
+  //  let arr = [{name: "Samip", phone : "123"}, {name: "Satya", phone : "789"}, {name: "Chirag", phone : "456"},]
+
+  //  let outputSample = 
+  //  [
+  //    {
+  //      title: "S", 
+  //      data: [{name: "Samip", phone : "123" }, {name: "Satya", phone : "789"}]
+  //    },
+  //    {
+  //      title: "C", 
+  //      data: [{name: "Chirag", phone : "456"},] 
+  //    }
+  //  ]
+
+  // let arr = props.contacts
+  // const groupBy = (arr, alphArray) => {
+  //   return (
