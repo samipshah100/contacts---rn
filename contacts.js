@@ -21,8 +21,18 @@ export const compareNames = (contact1, contact2) => {
   if (contact1.name > contact2.name) return 1
   else return -1 
 }
+
 // add keys to based on index
+// key is actually the name of the property. 
 const addKeys = (val, key) => ({key, ...val})
+// ^ this is shorcut for below. 
+const addKeysSAME = (val, key) => ({key: key, ...val})
+// ^ which is a way to do below:
+const addKeysBIG = (contact, key) => ({
+	key: key, 
+	name: name,
+	phone: phone,
+})
 
 // create an array of length NUM_CONTACTS and alphabetize by name
 export default Array.from({length: NUM_CONTACTS}, createContact).map(addKeys)

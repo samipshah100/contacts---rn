@@ -9,10 +9,8 @@ import ContactDetailsScreen from './screens/ContactDetailsScreen'
 import LoginScreen from './screens/LoginScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import { Ionicons } from '@expo/vector-icons';
-
-
 import contacts, { compareNames } from './contacts'
-
+import {fetchUsers} from './Api'
 import Row from './Row'
 
 let testArr = [{ name: "samip", phone: "123" }]
@@ -23,6 +21,16 @@ export default class App extends React.Component {
     contacts: contacts,
     showForm: false,
   }
+
+  // componentDidMount()
+  // {
+  //    this.getUsers()
+  // }
+  
+  // getUsers = async () =>  {
+  //   const results = await fetchUsers()
+  //   this.setState({contacts: results})
+  // }
 
   addContact = newContact => {
     this.setState(prevState => ({
