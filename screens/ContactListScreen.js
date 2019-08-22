@@ -4,8 +4,10 @@ import React from 'react'
 import Constants from 'expo-constants'
 import ContactsList from '../ContactsList';
 import { compareNames } from '../contacts'
+// import store from '../redux/store'
+import {connect} from 'react-redux'
 
-export default class ContactListScreen extends React.Component {
+class ContactListScreen extends React.Component {
 
   static navigationOptions = (exampleThings) => ({
     headerTitle: 'Contacts',
@@ -43,9 +45,11 @@ export default class ContactListScreen extends React.Component {
     // return <Text>Hello</Text>
     return (
       <View style={styles.container}>
+        <Button title="Toogle Contacts" onPress = {this.toggleContacts} />
         {this.state.showContacts &&
           <ContactsList
-            contacts={this.props.screenProps.contacts}
+            // contacts={this.props.screenProps.contacts}
+            contacts = {this.props.contacts}
             onSelectContact={
               (contact) => {
                 this.props.navigation.navigate('ContactDetails', {
@@ -71,3 +75,10 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
   },
 });
+
+const mapStateToProps = state => ({
+  contacts: state.contacts,
+})
+
+// connect is a higher order component. it listens to application state (from the store). it updates when the state updates. and passes down the props defined according to mapStateToProps
+export default connect(mapStateToProps)(ContactListScreen)
